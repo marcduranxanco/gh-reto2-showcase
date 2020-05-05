@@ -7,5 +7,12 @@
 * Bootstrap
 * Git (Gitflow)
 
+## Gitflow
+Created:
+* Master branch
+* Develop branch
+* Feature branches
+
+
 ## Author
 * **Marc Duran**
