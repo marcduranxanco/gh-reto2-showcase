@@ -1,16 +1,56 @@
-*{
+/* body{
     box-sizing: border-box;
-}
+    margin:0px;
+} */
 
 @font-face {
     font-family: "Backtothefuture";
     src: url("../fonts/BTTF.ttf");
 }
-
-h1, .navbar-brand {
+/* FONTS BEGIN */
+h1, h2, h3, h4, h5, .navbar-brand {
     font-family: "Backtothefuture";
 }
 
+.ttl-shp-cart h4{
+    margin-top: 0.5em;
+}
+/* FONTS END */
+
+
+/* HEADER BEGIN */
+.main-banner {
+    padding-top: 1em;
+}
+/* HEADER END */
+
 .alter-top{
     top: 15px !important;
+}
+
+.filter {
+    margin-bottom: 1em;
+}
+
+.menu-categories img {
+    width: 60px;
+    padding-left: 20px;
+    cursor: pointer;
+}
+
+.main-color {
+    background-color: #F06292;
+}
+
+.shopping-cart {
+    background-color: #F8BBD0;
+}
+
+/* FOOTER */
+footer {
+    background-color: #FCE4EC;
+}
+
+.footer-copyright {
+    background-color: #F06292;
 }
