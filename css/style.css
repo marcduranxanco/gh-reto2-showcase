@@ -3,11 +3,12 @@
     margin:0px;
 } */
 
+/* FONTS BEGIN */
 @font-face {
     font-family: "Backtothefuture";
     src: url("../fonts/BTTF.ttf");
 }
-/* FONTS BEGIN */
+
 h1, h2, h3, h4, h5, .navbar-brand {
     font-family: "Backtothefuture";
 }
@@ -17,18 +18,18 @@ h1, h2, h3, h4, h5, .navbar-brand {
 }
 /* FONTS END */
 
-
 /* HEADER BEGIN */
 .main-banner {
     padding-top: 1em;
 }
 /* HEADER END */
 
+/* MAIN BEING */
 .alter-top{
     top: 15px !important;
 }
 
-.filter {
+.menu-categories {
     margin-bottom: 1em;
 }
 
@@ -45,8 +46,24 @@ h1, h2, h3, h4, h5, .navbar-brand {
 .shopping-cart {
     background-color: #F8BBD0;
 }
+/* MAIN END */
 
-/* FOOTER */
+/* DRAGABBLES BEGIN */
+.dragabble-div {
+    cursor: pointer;
+}
+
+/* Shopping cart */
+.hovered-shopping-cart {
+    background-color: #F06292;
+}
+.opac {
+    opacity: 0.2;
+}
+
+/* DRAGABLES END */
+
+/* FOOTER BEGIN */
 footer {
     background-color: #FCE4EC;
 }
@@ -54,3 +71,4 @@ footer {
 .footer-copyright {
     background-color: #F06292;
 }
+/* FOOTER END */
