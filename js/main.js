@@ -4,59 +4,14 @@ const movies_filter_element = document.querySelector('#movies_filter_element');
 const tvshows__filter_element = document.querySelector('#tvshows_filter_element');
 const games_filter_element = document.querySelector('#games_filter_element');
 const shoppingCart = document.querySelector('.shopping-cart');
-const draggables_div = document.querySelectorAll('.draggable_div');
 const showcase_div = document.querySelector('#showcase_div');
-
-const dragStartf = () => {
-    focusSC(true);
-}
-
-const dragEndf = () => {
-    focusSC(false);
-}
 
 movies_filter_element.addEventListener("click", () => { console.log("Moovies"); });
 tvshows__filter_element.addEventListener("click", () => { console.log("tvshows"); });
 games_filter_element.addEventListener("click", () => { console.log("games"); });
 
-shoppingCart.addEventListener("click", () => {
-    console.log("shoping c");
-});
-
-shoppingCart.addEventListener("dragover", ev => {
-    dragOver(ev);
-});
-
-draggables_div.forEach( (dragableDiv) => {
-    //Drag starts. When begin the dragg
-        dragableDiv.addEventListener("dragstart", dragStartf);
-    //Drag end.
-        dragableDiv.addEventListener("dragend", dragEndf);
-    }
-);
-
-
-const focusSC = (isFocus) => {
-    let allExcepSc = document.querySelectorAll('nav, header, .draggable-div, .menu-categories');
-    if (isFocus) {
-        allExcepSc.forEach( (currentValue) => { 
-            currentValue.classList.add('opac');
-            shoppingCart.classList.add('hovered-shopping-cart');
-        });
-    } else {
-        allExcepSc.forEach( (currentValue) => { 
-            currentValue.classList.remove('opac');
-            shoppingCart.classList.remove('hovered-shopping-cart');
-        });
-        
-    }
-}
-
-const dragOver = (ev) => {
-    ev.preventDefault();
-    console.log('over');
-}
-
+//SHOWCASE 'DATABASE'
+//SHOWCASE 'DATABASE'
 //SHOWCASE 'DATABASE'
 
 //OBJECT PRODUCTS CREATION
@@ -121,4 +76,57 @@ for (const key in products) {
         createProduct(element);
         
     }
+}
+
+//DRAGABLE STUFF
+//DRAGABLE STUFF
+//DRAGABLE STUFF
+
+const draggables_div = document.querySelectorAll('.draggable_div');
+
+const dragStartf = () => {
+    console.log('dragstart');
+    focusSC(true);
+}
+
+const dragEndf = () => {
+    console.log('dragend');
+    focusSC(false);
+}
+
+shoppingCart.addEventListener("click", () => {
+    console.log("shoping c");
+});
+
+shoppingCart.addEventListener("dragover", ev => {
+    dragOver(ev);
+});
+
+draggables_div.forEach( (dragable_div) => {
+    //Drag starts. When begin the dragg
+        dragable_div.addEventListener("dragstart", dragStartf);
+    //Drag end.
+        dragable_div.addEventListener("dragend", dragEndf);
+    }
+);
+
+const focusSC = (isFocus) => {
+    let allExcepSc = document.querySelectorAll('nav, header, .draggable_div, .menu-categories');
+    if (isFocus) {
+        allExcepSc.forEach( (currentValue) => { 
+            currentValue.classList.add('opac');
+            shoppingCart.classList.add('hovered-shopping-cart');
+        });
+    } else {
+        allExcepSc.forEach( (currentValue) => { 
+            currentValue.classList.remove('opac');
+            shoppingCart.classList.remove('hovered-shopping-cart');
+        });
+        
+    }
+}
+
+const dragOver = (ev) => {
+    ev.preventDefault();
+    console.log('over');
 }
