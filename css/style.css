@@ -53,16 +53,14 @@ main{
 /* MAIN END */
 
 /* DRAGABBLES BEGIN */
-.draggable-div {
+.draggable_div {
     padding: 15px;
-    /* border: red;
-    border-style: dotted; */
     cursor: pointer;
     max-height: 14em;
     height:14em;
 }
 
-.draggable-div > img {
+.draggable_div > img {
     width:100%;
     height:100%;
     object-fit: cover;
