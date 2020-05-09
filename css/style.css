@@ -25,6 +25,10 @@ h1, h2, h3, h4, h5, .navbar-brand {
 /* HEADER END */
 
 /* MAIN BEING */
+main{
+    margin: 10px
+}
+
 .alter-top{
     top: 15px !important;
 }
@@ -49,16 +53,29 @@ h1, h2, h3, h4, h5, .navbar-brand {
 /* MAIN END */
 
 /* DRAGABBLES BEGIN */
-.dragabble-div {
+.draggable-div {
+    padding: 15px;
+    /* border: red;
+    border-style: dotted; */
     cursor: pointer;
+    max-height: 14em;
+    height:14em;
+}
+
+.draggable-div > img {
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    overflow: hidden;
 }
 
 /* Shopping cart */
-.hovered-shopping-cart {
-    background-color: #F06292;
-}
 .opac {
-    opacity: 0.2;
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+    opacity: 0.1;
 }
 
 /* DRAGABLES END */
