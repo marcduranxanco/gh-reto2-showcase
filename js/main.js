@@ -1,14 +1,8 @@
 "use strict";
 
-const movies_filter_element = document.querySelector('#movies_filter_element');
-const tvshows__filter_element = document.querySelector('#tvshows_filter_element');
-const games_filter_element = document.querySelector('#games_filter_element');
 const shoppingCart = document.querySelector('.shopping-cart');
 const showcase_div = document.querySelector('#showcase_div');
-
-movies_filter_element.addEventListener("click", () => { console.log("Moovies"); });
-tvshows__filter_element.addEventListener("click", () => { console.log("tvshows"); });
-games_filter_element.addEventListener("click", () => { console.log("games"); });
+let draggables_div;
 
 //SHOWCASE 'DATABASE'
 //SHOWCASE 'DATABASE'
@@ -38,20 +32,18 @@ let img_08 = 'https://instagram.fbcn5-2.fna.fbcdn.net/v/t51.2885-15/e35/13694945
 let img_09 = 'https://instagram.fbcn5-2.fna.fbcdn.net/v/t51.2885-15/e35/13277769_890721924371953_19753307_n.jpg?_nc_ht=instagram.fbcn5-2.fna.fbcdn.net&_nc_cat=101&_nc_ohc=INdqFcIONkUAX8HgI-4&oh=4f87b86c96990855a718341e1dcde3ff&oe=5EE1D8DC';
 let img_10 = 'https://instagram.fbcn5-1.fna.fbcdn.net/v/t51.2885-15/e35/12142194_1522203271420744_2125401475_n.jpg?_nc_ht=instagram.fbcn5-1.fna.fbcdn.net&_nc_cat=104&_nc_ohc=UEVInk5mR1cAX8UGPtW&oh=5b3a9c6c37698930ff13a219cb440c30&oe=5EDED090';
 
-
 products.push(
-    new Product('01', 'Jocker', img_01, 'movie'),
-    new Product('02', 'GTA', img_02, 'v_game'),
-    new Product('03', 'Doom', img_03, 'v_game'),
-    new Product('04', 'The handmanid\'s tale', img_04, 'tv_show'),
-    new Product('05', 'The rise of Skywalker', img_05, 'movie'),
-    new Product('06', 'Dark', img_06, 'tv_show'),
-    new Product('07', 'Looper', img_07, 'movie'),
-    new Product('08', 'Strangers things', img_08, 'tv_show'),
-    new Product('09', 'Ready player one', img_09, 'movie'),
-    new Product('10', 'The revenant', img_10, 'movie')
+    new Product('prd_01', 'Jocker', img_01, 'movie'),
+    new Product('prd_02', 'GTA', img_02, 'v_game'),
+    new Product('prd_03', 'Doom', img_03, 'v_game'),
+    new Product('prd_04', 'The handmanid\'s tale', img_04, 'tv_show'),
+    new Product('prd_05', 'The rise of Skywalker', img_05, 'movie'),
+    new Product('prd_06', 'Dark', img_06, 'tv_show'),
+    new Product('prd_07', 'Looper', img_07, 'movie'),
+    new Product('prd_08', 'Strangers things', img_08, 'tv_show'),
+    new Product('prd_09', 'Ready player one', img_09, 'movie'),
+    new Product('prd_10', 'The revenant', img_10, 'movie')
 );
-
 
 //Fill showcase
 const createProduct = (product) => {
@@ -78,55 +70,103 @@ for (const key in products) {
     }
 }
 
-//DRAGABLE STUFF
-//DRAGABLE STUFF
-//DRAGABLE STUFF
-
-const draggables_div = document.querySelectorAll('.draggable_div');
-
-const dragStartf = () => {
-    console.log('dragstart');
-    focusSC(true);
-}
-
-const dragEndf = () => {
-    console.log('dragend');
-    focusSC(false);
-}
-
-shoppingCart.addEventListener("click", () => {
-    console.log("shoping c");
-});
-
-shoppingCart.addEventListener("dragover", ev => {
-    dragOver(ev);
-});
-
-draggables_div.forEach( (dragable_div) => {
-    //Drag starts. When begin the dragg
-        dragable_div.addEventListener("dragstart", dragStartf);
-    //Drag end.
-        dragable_div.addEventListener("dragend", dragEndf);
-    }
-);
-
-const focusSC = (isFocus) => {
-    let allExcepSc = document.querySelectorAll('nav, header, .draggable_div, .menu-categories');
+//FOCUS ELEMENTS
+//FOCUS ELEMENTS
+//FOCUS ELEMENTS
+const focusElements = (isFocus, elements) => {
+    let elementsToHide = []
+    elements.forEach(element => {
+        elementsToHide.push(document.querySelectorAll(element));
+    });
+    
     if (isFocus) {
-        allExcepSc.forEach( (currentValue) => { 
-            currentValue.classList.add('opac');
+        elementsToHide.forEach( (element) => { 
+            element[0].classList.add('opac');
             shoppingCart.classList.add('hovered-shopping-cart');
         });
     } else {
-        allExcepSc.forEach( (currentValue) => { 
-            currentValue.classList.remove('opac');
+        elementsToHide.forEach( (element) => { 
+            element[0].classList.remove('opac');
             shoppingCart.classList.remove('hovered-shopping-cart');
         });
         
     }
 }
 
+
+//DRAGABLE STUFF
+//DRAGABLE STUFF
+//DRAGABLE STUFF
+
+const dragStartf = (elements) => {
+    console.log(elements)
+}
+
 const dragOver = (ev) => {
     ev.preventDefault();
     console.log('over');
 }
+
+shoppingCart.addEventListener("dragover", ev => {
+    dragOver(ev);
+});
+
+draggables_div = document.querySelectorAll('.draggable_div');
+
+draggables_div.forEach( draggable_div => {
+        let allExceptShoppingCart = ['nav', 'header', '#showcase_div', '#menu-categories'];
+
+        draggable_div.addEventListener("dragstart", () => {
+            console.log('dragstart');
+            focusElements(true, allExceptShoppingCart);
+        });
+        draggable_div.addEventListener("dragend", () => {
+            console.log('dragstend');
+            focusElements(false, allExceptShoppingCart);
+        });
+    }
+);
+
+//SHOPPING LIST MANAGEMENT
+let shopping_cart_arr = []
+
+function Shop_cart_product(hours, id_product) {
+    this.hours = hours;
+    this.product = products.find(product => product.id_product = id_product)
+
+    return this;
+}
+
+const add_prod_to_cart = (product) => {
+    shopping_cart_arr.push(product);
+    
+}
+
+const update_cart = () => {
+    console.log('carta actualizada!')
+}
+
+add_prod_to_cart(new Shop_cart_product(10, 'prd_01'));
+
+console.log(shopping_cart_arr);
+console.log(products.find(product => product.id_product = 'prd_01'));
+
+
+//FILTER
+//FILTER
+//FILTER
+
+const movies_filter_element = document.querySelector('#movies_filter_element');
+const tvshows__filter_element = document.querySelector('#tvshows_filter_element');
+const games_filter_element = document.querySelector('#games_filter_element');
+movies_filter_element.addEventListener("click", () => { focusElements(true, (['#tvshows_filter_element', '#games_filter_element'])) });
+tvshows__filter_element.addEventListener("click", () => { focusElements(true, (['#movies_filter_element', '#games_filter_element'])) });
+games_filter_element.addEventListener("click", () => { focusElements(true, (['#tvshows_filter_element', '#movies_filter_element'])) });
+
+
+// FILTER
+
+// window.addEventListener('load', function() {
+//     let prd_01 = document.querySelector('#prd_01');
+//     prd_01.style.display = "none";
+// })
