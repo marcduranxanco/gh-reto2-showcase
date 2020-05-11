@@ -12,7 +12,6 @@ h5,
 .navbar-brand {
   font-family: "Backtothefuture";
 }
-
 /* FONTS END */
 
 /* SHOPPING CART BEGIN */
@@ -106,11 +105,7 @@ main {
 }
 
 .alter-top {
-  top: 15px !important;
-}
-
-#menu-categories {
-  margin-bottom: 1em;
+  top: 7px !important;
 }
 
 #menu-categories img {
@@ -119,14 +114,23 @@ main {
   cursor: pointer;
 }
 
-.main-color {
-  background-color: #f06292;
-}
-
 .shopping-cart {
   background-color: #f8bbd0;
 }
+
 /* MAIN END */
+
+/* NAV BEGIN */
+.navbar {
+    background-color: #f06292;
+}
+
+@media (max-width: 576px) {
+    .navbar-brand {
+        opacity: 0;
+    }
+}
+/* NAV END */
 
 /* DRAGABBLES BEGIN */
 .draggable_div {
@@ -172,9 +176,35 @@ main {
 /* FOOTER BEGIN */
 footer {
   background-color: #fce4ec;
+  text-align: center;
+}
+
+footer h5, footer .image_ftr {
+  text-align: center;
+}
+
+footer a {
+  color: rgb(33, 37, 41);
+  text-decoration: none;
+}
+
+footer i {
+  margin-right: 1em;
+}
+
+footer a:hover {
+  text-decoration: none;
+  color:#f06292;
 }
 
 .footer-copyright {
   background-color: #f06292;
+  color: #f8bbd0;
+  font-size: 0.6em;
+}
+
+footer img {
+    width: 5em;
+    border-radius: 50%;
 }
 /* FOOTER END */
