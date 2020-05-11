@@ -135,16 +135,20 @@ let shopping_cart_arr = []
 
 function Shop_cart_product(hours, id_product) {
     this.hours = hours;
-    this.product = products.find(product => product.id_product == id_product)
-    console.log(this.product)
-
+    this.id_product = id_product;
     return this;
 }
 
-const add_prod_to_cart = (Shop_cart_product) => {
-    shopping_cart_arr.push(Shop_cart_product);
+const add_prod_to_cart = (shop_cart_product) => {
+    let cur_id = shop_cart_product.id_product;
+    let product = shopping_cart_arr.find(shop_cart_product => shop_cart_product.id_product == cur_id);
+    if(product){
+        product.hours++;
+    }else{
+        shopping_cart_arr.push(shop_cart_product);
+    }
+
     update_cart()
-    
 }
 
 const update_cart = () => {
