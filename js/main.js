@@ -1,6 +1,7 @@
 "use strict";
 
 const shoppingCart = document.querySelector("#shopping-cart");
+const shoppingList = document.querySelector("#shopping-list");
 const showcase_div = document.querySelector("#showcase_div");
 let draggables_div;
 
@@ -185,9 +186,46 @@ const add_prod_to_cart = (shop_cart_product) => {
 };
 
 const update_cart = () => {
-  console.log("carta actualizada!");
-  console.log(shopping_cart_arr);
+    shoppingList.innerHTML = "";
+
+    shopping_cart_arr.forEach((shop_cart_product) => {
+        
+        let product = products.find(
+            (products) => products.id_product == shop_cart_product.id_product
+            );
+        console.log(shop_cart_product);
+        let li_prd = `
+            <li class="list-group-item">
+                <div class="product-cart">
+                    <div class="container">
+                    <img
+                        src="${product.img_path}"
+                        class="img-cart"
+                    />
+                    </div>
+                    <div class="container">
+                    ${product.name_product}
+                    </div>
+                    <div class="container">
+                    <input
+                        type="number"
+                        class="form-control text-center"
+                        value="${shop_cart_product.hours}"
+                        min="0"
+                        id="qty"
+                    />
+                    </div>
+                    <div class="container">
+                    <i class="fa fa-trash" id="rmv-prd"></i>
+                    </div>
+                </div>
+            </li>
+        `
+        shoppingList.innerHTML += li_prd;
+        });   
 };
+
+
 
 // add_prod_to_cart(new Shop_cart_product(10, 'prd_01'));
 
