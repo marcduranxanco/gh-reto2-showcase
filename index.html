@@ -39,7 +39,7 @@
         <a class="navbar-brand">tape&future</a>
         <ul class="list-inline">
           <li class="list-inline-item">
-            <a class="nav-link" href="#">Login</a>
+            <!-- <a class="nav-link" href="#">Login</a> -->
           </li>
         </ul>
       </nav>
@@ -94,55 +94,60 @@
         </div>
       </div>
       <main>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-10 col-sm-12">
-            <div class="row" id="showcase_div">
-              <!-- showcase!!! >.< -->
-            </div>
-          </div>
-          <!-- SHOPPING CART -->
-          <div
-            class="col-lg-2 order-lg-last col-sm-12 order-first shopping-cart text-center"
-            id="shopping-cart"
-          >
-            <div class="row ttl-shp-cart">
-              <!-- Tittle -->
-              <div class="col text-center"> 
-                <h5>tu pedido</h5>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-10 col-sm-12">
+              <div class="row" id="showcase_div">
+                <!-- Showcase elements -->
               </div>
             </div>
-            <!-- Header -->
-            <div class="row">
-              <div class="col-lg-6">
-                <b>Nombre</b>
+            <!-- SHOPPING CART -->
+            <div
+              class="col-lg-2 order-lg-last col-sm-12 order-first card"
+              id="shopping-cart"
+            >
+              <!-- Card header -->
+              <div class="card-header">
+                <h5 class="card-title">tu pedido</h5>
               </div>
-              <div class="col-lg-6">
-                <b>Horas</b>
+              <!-- Card detail -->
+              <div class="card-block">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                    <div class="product-cart">
+                      <div class="container">
+                        <img
+                          src="https://instagram.fbcn5-1.fna.fbcdn.net/v/t51.2885-15/e35/p1080x1080/60015854_291317965083436_5161664552507429105_n.jpg?_nc_ht=instagram.fbcn5-1.fna.fbcdn.net&_nc_cat=104&_nc_ohc=EDOtFki5k90AX-pWXex&oh=dceae3c23f15061289ca4f0377b072d6&oe=5EE16145"
+                          class="img-cart"
+                        />
+                      </div>
+                      <div class="container">
+                        Grand thief auto
+                      </div>
+                      <div class="container">
+                        <input
+                          type="number"
+                          class="form-control text-center"
+                          value="1"
+                          min="0"
+                          id="qty"
+                        />
+                      </div>
+                      <div class="container">
+                        <i class="fa fa-trash" id="rmv-prd"></i>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
               </div>
-            </div>
-            <!-- Data -->
-            <div class="row">
-              <div class="col-lg-6">
-                Nombre serie
-              </div>
-              <div class="col-lg-6">
-                <i class="fas fa-plus"></i> 10 <i class="fas fa-minus"></i>
-              </div>
-            </div>
-            <!-- TOTAL -->
-            <div class="row">
-              <div class="col-lg-6">
-                <b><span>Total</span></b>
-              </div>
-              <div class="col-lg-6">
-                ??
+              <!-- Card Footer -->
+              <div class="card-footer">
+                Total
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
 
       <!-- Footer -->
       <footer class="page-footer font-small blue pt-4">
