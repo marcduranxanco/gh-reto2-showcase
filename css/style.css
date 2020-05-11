@@ -1,11 +1,16 @@
 /* FONTS BEGIN */
 @font-face {
-    font-family: "Backtothefuture";
-    src: url("../fonts/BTTF.ttf");
+  font-family: "Backtothefuture";
+  src: url("../fonts/BTTF.ttf");
 }
 
-h1, h2, h3, h4, h5, .navbar-brand {
-    font-family: "Backtothefuture";
+h1,
+h2,
+h3,
+h4,
+h5,
+.navbar-brand {
+  font-family: "Backtothefuture";
 }
 
 /* FONTS END */
@@ -13,146 +18,163 @@ h1, h2, h3, h4, h5, .navbar-brand {
 /* SHOPPING CART BEGIN */
 /* Cart general */
 .card {
-    padding: 0px !important;
-    border: none !important;
-    padding-top: 15px !important;
+  padding: 0px !important;
+  border: none !important;
+  padding-top: 15px !important;
+  border-radius: 0px !important;
 }
 
 #shopping-cart {
-    font-size: 0.7em;
+  font-size: 0.7em;
 }
 
 /* Cart header */
-.card-header, .card-footer {
-    background-color: #F8BBD0 !important;
+.card-header,
+.card-footer {
+  border-radius: 0em !important;
+  background-color: #f8bbd0 !important;
 }
 
-.ttl-shp-cart{
-    margin-top: 0.5em;
+.ttl-shp-cart {
+  margin-top: 0.5em;
 }
 
 .card-header * {
-    margin: 0px !important;
-    text-align: center;
+  margin: 0px !important;
+  text-align: center;
 }
 
 .list-group-item {
-    padding: 0.2em !important;
+  padding: 0.2em !important;
 }
 
 .product-cart {
-    display: flex;
-    align-items:center !important;
+  display: flex;
+  align-items: center !important;
 }
 
 .product-cart .container {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 /* Cart detail */
-.list-group-item *{
-    padding: 0px !important;
+.list-group-item * {
+  padding: 0px !important;
 }
 
 .img-cart {
-    width: 3em;
+  width: 3em;
 }
 /* Product control */
 .form-control {
-    font-size: inherit !important;
+  font-size: inherit !important;
 }
 
 #qty {
-    background-color: #FCE4EC;
-    border: none;
+  background-color: #fce4ec;
+  border: none;
 }
 
 #qty:focus {
-    outline: none;
-    border: 0px
+  outline: none;
+  border: 0px;
 }
 
 #rmv-prd:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .card-footer {
-    text-align: right;
-    font-weight: bolder;
-    text-transform: uppercase;
-    font-size: 1.2em;
+  text-align: right;
+  font-weight: bolder;
+  text-transform: uppercase;
+  font-size: 1.2em;
 }
 
 /* SHOPPING CART END */
 
-
 /* HEADER BEGIN */
 .main-banner {
-    padding-top: 1em;
+  padding-top: 1em;
 }
 /* HEADER END */
 
 /* MAIN BEING */
-main{
-    margin: 10px
+main {
+  margin: 10px;
 }
 
-.alter-top{
-    top: 15px !important;
+.alter-top {
+  top: 15px !important;
 }
 
 #menu-categories {
-    margin-bottom: 1em;
+  margin-bottom: 1em;
 }
 
 #menu-categories img {
-    width: 60px;
-    padding-left: 20px;
-    cursor: pointer;
+  width: 60px;
+  padding-left: 20px;
+  cursor: pointer;
 }
 
 .main-color {
-    background-color: #F06292;
+  background-color: #f06292;
 }
 
 .shopping-cart {
-    background-color: #F8BBD0;
+  background-color: #f8bbd0;
 }
 /* MAIN END */
 
 /* DRAGABBLES BEGIN */
 .draggable_div {
-    padding: 15px;
-    cursor: pointer;
-    max-height: 14em;
-    height:14em;
+  padding: 15px;
+  cursor: pointer;
+  max-height: 14em;
+  height: 14em;
 }
 
 .draggable_div > img {
-    width:100%;
-    height:100%;
-    object-fit: cover;
-    overflow: hidden;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.bottom-right {
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+}
+
+.bottom-right button {
+  background-color: #fce4ec;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 10%;
+  opacity: 0.8;
 }
 
 /* Shopping cart */
 .opac {
-    -webkit-transition: all 0.2s linear;
-    -moz-transition: all 0.2s linear;
-    -o-transition: all 0.2s linear;
-    transition: all 0.2s linear;
-    opacity: 0.3;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  opacity: 0.3;
 }
 
 /* DRAGABLES END */
 
 /* FOOTER BEGIN */
 footer {
-    background-color: #FCE4EC;
+  background-color: #fce4ec;
 }
 
 .footer-copyright {
-    background-color: #F06292;
+  background-color: #f06292;
 }
 /* FOOTER END */
