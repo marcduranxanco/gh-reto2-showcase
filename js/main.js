@@ -1,6 +1,6 @@
 "use strict";
 
-const shoppingCart = document.querySelector(".shopping-cart");
+const shoppingCart = document.querySelector("#shopping-cart");
 const showcase_div = document.querySelector("#showcase_div");
 let draggables_div;
 
@@ -110,21 +110,9 @@ const focusElements = (isFocus, elements) => {
 //DRAGABLE STUFF
 //DRAGABLE STUFF
 
-const dragStartf = (elements) => {
-  console.log(elements);
-};
-
-const dragOver = (ev) => {
-  ev.preventDefault();
-  console.log("over");
-};
-
-shoppingCart.addEventListener("dragover", (ev) => {
-  dragOver(ev);
-});
-
 draggables_div = document.querySelectorAll(".draggable_div");
 
+//DRAGABLES DIV ACTIONS
 draggables_div.forEach((draggable_div) => {
   let allExceptShoppingCart = [
     "nav",
@@ -133,17 +121,44 @@ draggables_div.forEach((draggable_div) => {
     "#menu-categories",
   ];
 
-  draggable_div.addEventListener("dragstart", () => {
+  draggable_div.addEventListener("dragstart", (ev) => {
     console.log("dragstart");
     focusElements(true, allExceptShoppingCart);
+    //Transfer id product on drag start
+    ev.dataTransfer.setData(
+      "id_prd",
+      ev.srcElement.closest([".draggable_div"]).id
+    );
   });
-  draggable_div.addEventListener("dragend", (event) => {
+
+  draggable_div.addEventListener("dragend", () => {
     console.log("dragstend");
     focusElements(false, allExceptShoppingCart);
-    //Add product to cart
-    var prd_id = event.currentTarget.id;
-    add_prod_to_cart(new Shop_cart_product(1, prd_id));
+    //Add product to cart id
   });
+});
+
+//DRAG START
+const dragStartf = (elements) => {
+  console.log(elements);
+};
+
+//DRAG OVER
+const dragOver = (ev) => {
+  ev.preventDefault();
+  console.log("over");
+};
+
+//ACTIONS IN SHOPPING CART
+shoppingCart.addEventListener("dragover", (ev) => {
+  dragOver(ev);
+});
+
+shoppingCart.addEventListener("drop", (ev) => {
+  console.log("drop");
+  //Add product to cart
+  var prd_id = ev.dataTransfer.getData("id_prd");
+  add_prod_to_cart(new Shop_cart_product(1, prd_id));
 });
 
 //SHOPPING LIST MANAGEMENT
