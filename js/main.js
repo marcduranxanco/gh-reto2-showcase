@@ -68,7 +68,7 @@ const createProduct = (product) => {
             alt="${product.name_product}"
         />
         <div class="bottom-right">
-          <i class="fa fa-cart-arrow-down add-prd" aria-hidden="true" value="${product.id_product}"></i>
+          <i class="fa fa-cart-plus add-prd" aria-hidden="true" value="${product.id_product}"></i>
         </div>
     </div>
 `;
@@ -132,7 +132,7 @@ draggables_div.forEach((draggable_div) => {
   });
 });
 
-document.addEventListener('click',function(e){
+document.addEventListener('click', (e) => {
   //Remove product
   let rmv_class = e.target.classList.contains('rmv-prd');
   if(e.target && rmv_class){
@@ -145,6 +145,16 @@ document.addEventListener('click',function(e){
   if(e.target && add_class){
     let prd_id = e.path[0].attributes.value.textContent;
     add_prod_to_cart(new Shop_cart_product(1, prd_id));
+  }
+});
+
+document.addEventListener("change", (e) => {
+  //Add product from input number shopping card
+  let add_hour = e.target.classList.contains('add_hour');
+  if(e.target && add_hour){
+    let new_hours = e.srcElement.value;
+    let prd_id = e.path[0].attributes.id.textContent.replace('nbr_', '');
+    update_prod_cart(prd_id, new_hours);
   }
 });
 
@@ -192,6 +202,17 @@ const add_prod_to_cart = (shop_cart_product) => {
   update_cart();
 };
 
+const update_prod_cart = (id_prd, new_hours) => {
+  let shop_cart_prd = shopping_cart_arr.find(
+    shop_cart_product => shop_cart_product.id_product == id_prd
+  );
+
+  let i = shopping_cart_arr.indexOf(shop_cart_prd);
+  shopping_cart_arr[i].hours = parseInt(new_hours);
+
+  update_cart();
+};
+
 const rmv_prod_from_cart = (id_prd) => {
   let product = shopping_cart_arr.find(
     (shop_cart_product) => shop_cart_product.id_product == id_prd
@@ -225,7 +246,6 @@ const update_cart = () => {
       let product = products.find(
         (products) => products.id_product == shop_cart_product.id_product
       );
-      console.log(shop_cart_product);
       let li_prd = `
               <li class="list-group-item">
                   <div class="product-cart">
@@ -241,14 +261,18 @@ const update_cart = () => {
                       <div class="container">
                       <input
                           type="number"
-                          class="form-control text-center prod_hours"
+                          class="form-control text-center add_hour"
                           value="${shop_cart_product.hours}"
                           min="0"
-                          id="qty"
+                          id="nbr_${product.id_product}"
                       />
                       </div>
                       <div class="container">
-                      <i class="fa fa-trash rmv-prd" value="${product.id_product}"></i>
+                      <i
+                        class="fa fa-trash rmv-prd"
+                        value="${product.id_product}"
+                        >
+                      </i>
                       </div>
                   </div>
               </li>

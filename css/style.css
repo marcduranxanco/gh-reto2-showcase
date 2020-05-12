@@ -71,14 +71,9 @@ h5,
   font-size: inherit !important;
 }
 
-#qty {
-  background-color: #fce4ec;
-  border: none;
-}
-
-#qty:focus {
-  outline: none;
-  border: 0px;
+.add_hour {
+  background-color: #fce4ec !important;
+  border: none !important;
 }
 
 #rmv-prd:hover {
