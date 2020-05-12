@@ -1,10 +1,10 @@
 "use strict";
 
-const shoppingCart = document.querySelector(".shopping-cart");
+const shoppingCart = document.querySelector("#shopping-cart");
+const shoppingList = document.querySelector("#shopping-list");
 const showcase_div = document.querySelector("#showcase_div");
 let draggables_div;
 
-//SHOWCASE 'DATABASE'
 //SHOWCASE 'DATABASE'
 //SHOWCASE 'DATABASE'
 
@@ -46,7 +46,7 @@ products.push(
   new Product("prd_01", "Jocker", img_01, "movie"),
   new Product("prd_02", "GTA", img_02, "v_game"),
   new Product("prd_03", "Doom", img_03, "v_game"),
-  new Product("prd_04", "The handmanid's tale", img_04, "tv_show"),
+  new Product("prd_04", "The handmaid's tale", img_04, "tv_show"),
   new Product("prd_05", "The rise of Skywalker", img_05, "movie"),
   new Product("prd_06", "Dark", img_06, "tv_show"),
   new Product("prd_07", "Looper", img_07, "movie"),
@@ -68,8 +68,7 @@ const createProduct = (product) => {
             alt="${product.name_product}"
         />
         <div class="bottom-right">
-            <button id="btn_more" value="${product.id_product}">+</button>
-            <button id="btn_less" value="${product.id_product}">-</button>
+          <i class="fa fa-cart-plus add-prd" aria-hidden="true" value="${product.id_product}"></i>
         </div>
     </div>
 `;
@@ -84,7 +83,6 @@ for (const key in products) {
   }
 }
 
-//FOCUS ELEMENTS
 //FOCUS ELEMENTS
 //FOCUS ELEMENTS
 const focusElements = (isFocus, elements) => {
@@ -108,23 +106,9 @@ const focusElements = (isFocus, elements) => {
 
 //DRAGABLE STUFF
 //DRAGABLE STUFF
-//DRAGABLE STUFF
-
-const dragStartf = (elements) => {
-  console.log(elements);
-};
-
-const dragOver = (ev) => {
-  ev.preventDefault();
-  console.log("over");
-};
-
-shoppingCart.addEventListener("dragover", (ev) => {
-  dragOver(ev);
-});
-
 draggables_div = document.querySelectorAll(".draggable_div");
 
+//DRAGABLES DIV ACTIONS
 draggables_div.forEach((draggable_div) => {
   let allExceptShoppingCart = [
     "nav",
@@ -133,17 +117,66 @@ draggables_div.forEach((draggable_div) => {
     "#menu-categories",
   ];
 
-  draggable_div.addEventListener("dragstart", () => {
-    console.log("dragstart");
+  draggable_div.addEventListener("dragstart", (ev) => {
+    //On dragstart, enable focus and transfer data to drop
     focusElements(true, allExceptShoppingCart);
+    ev.dataTransfer.setData(
+      "id_prd",
+      ev.srcElement.closest([".draggable_div"]).id
+    );
   });
-  draggable_div.addEventListener("dragend", (event) => {
-    console.log("dragstend");
+
+  draggable_div.addEventListener("dragend", () => {
+    //When dragend dissable focus elements
     focusElements(false, allExceptShoppingCart);
-    //Add product to cart
-    var prd_id = event.currentTarget.id;
-    add_prod_to_cart(new Shop_cart_product(1, prd_id));
   });
+});
+
+document.addEventListener('click', (e) => {
+  //Remove product
+  let rmv_class = e.target.classList.contains('rmv-prd');
+  if(e.target && rmv_class){
+    let prd_id = e.path[0].attributes.value.textContent;
+    rmv_prod_from_cart(prd_id);
+  }
+  
+  //Add product
+  let add_class = e.target.classList.contains('add-prd');
+  if(e.target && add_class){
+    let prd_id = e.path[0].attributes.value.textContent;
+    add_prod_to_cart(new Shop_cart_product(1, prd_id));
+  }
+});
+
+document.addEventListener("change", (e) => {
+  //Add product from input number shopping card
+  let add_hour = e.target.classList.contains('add_hour');
+  if(e.target && add_hour){
+    let new_hours = e.srcElement.value;
+    let prd_id = e.path[0].attributes.id.textContent.replace('nbr_', '');
+    update_prod_cart(prd_id, new_hours);
+  }
+});
+
+//DRAG START
+const dragStartf = (elements) => {
+  console.log(elements);
+};
+
+const dragOver = (ev) => {
+  // Dragover - When dragover removes the prohibition symbol. Allows drop.
+  ev.preventDefault();
+};
+
+//ACTIONS IN SHOPPING CART
+shoppingCart.addEventListener("dragover", (ev) => {
+  dragOver(ev);
+});
+
+shoppingCart.addEventListener("drop", (ev) => {
+  // Drop - On drop process add the elemenent to the shopping cart.
+  var prd_id = ev.dataTransfer.getData("id_prd");
+  add_prod_to_cart(new Shop_cart_product(1, prd_id));
 });
 
 //SHOPPING LIST MANAGEMENT
@@ -169,9 +202,86 @@ const add_prod_to_cart = (shop_cart_product) => {
   update_cart();
 };
 
+const update_prod_cart = (id_prd, new_hours) => {
+  let shop_cart_prd = shopping_cart_arr.find(
+    shop_cart_product => shop_cart_product.id_product == id_prd
+  );
+
+  let i = shopping_cart_arr.indexOf(shop_cart_prd);
+  shopping_cart_arr[i].hours = parseInt(new_hours);
+
+  update_cart();
+};
+
+const rmv_prod_from_cart = (id_prd) => {
+  let product = shopping_cart_arr.find(
+    (shop_cart_product) => shop_cart_product.id_product == id_prd
+  );
+  if (product) {
+    let filtered_shpcrt = shopping_cart_arr.filter(prod => prod !== product)
+    shopping_cart_arr = filtered_shpcrt;
+  }
+
+  update_cart();
+};
+
 const update_cart = () => {
-  console.log("carta actualizada!");
-  console.log(shopping_cart_arr);
+  shoppingList.innerHTML = "";
+  let totalHours = 0;
+  //Default shopping cart when it's empty
+  if(shopping_cart_arr.length <= 0){
+    shoppingList.innerHTML += `
+    <div class="container">
+      <p>
+        ¡Todavía no tienes horas de disfrute!<br />
+        Arrastra elementos aquí para empezar a alquilar.
+      </p>
+    </div>
+    `;
+  }
+  else{
+    //Fill shopping cart with products
+    shopping_cart_arr.forEach((shop_cart_product) => {
+      totalHours += shop_cart_product.hours;
+      let product = products.find(
+        (products) => products.id_product == shop_cart_product.id_product
+      );
+      let li_prd = `
+              <li class="list-group-item">
+                  <div class="product-cart">
+                      <div class="container">
+                      <img
+                          src="${product.img_path}"
+                          class="img-cart"
+                      />
+                      </div>
+                      <div class="container">
+                      ${product.name_product}
+                      </div>
+                      <div class="container">
+                      <input
+                          type="number"
+                          class="form-control text-center add_hour"
+                          value="${shop_cart_product.hours}"
+                          min="0"
+                          id="nbr_${product.id_product}"
+                      />
+                      </div>
+                      <div class="container">
+                      <i
+                        class="fa fa-trash rmv-prd"
+                        value="${product.id_product}"
+                        >
+                      </i>
+                      </div>
+                  </div>
+              </li>
+          `;
+      shoppingList.innerHTML += li_prd;
+    });
+  }
+
+  document.querySelector("#horas").innerHTML = totalHours;
 };
 
 // add_prod_to_cart(new Shop_cart_product(10, 'prd_01'));
