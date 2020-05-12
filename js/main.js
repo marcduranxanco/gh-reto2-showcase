@@ -132,14 +132,17 @@ draggables_div.forEach((draggable_div) => {
   });
 });
 
-
-// document.querySelector(".rmv-prd").addEventListener("click", () => {
-//   console.log("remove product");
-// });
-
 document.addEventListener('click',function(e){
-  let arr_classList = e.target.classList.contains('add-prd');
-  if(e.target && arr_classList){
+  //Remove product
+  let rmv_class = e.target.classList.contains('rmv-prd');
+  if(e.target && rmv_class){
+    let prd_id = e.path[0].attributes.value.textContent;
+    rmv_prod_from_cart(prd_id);
+  }
+  
+  //Add product
+  let add_class = e.target.classList.contains('add-prd');
+  if(e.target && add_class){
     let prd_id = e.path[0].attributes.value.textContent;
     add_prod_to_cart(new Shop_cart_product(1, prd_id));
   }
@@ -189,44 +192,71 @@ const add_prod_to_cart = (shop_cart_product) => {
   update_cart();
 };
 
+const rmv_prod_from_cart = (id_prd) => {
+  let product = shopping_cart_arr.find(
+    (shop_cart_product) => shop_cart_product.id_product == id_prd
+  );
+  if (product) {
+    let filtered_shpcrt = shopping_cart_arr.filter(prod => prod !== product)
+    shopping_cart_arr = filtered_shpcrt;
+  }
+
+  update_cart();
+};
+
 const update_cart = () => {
   shoppingList.innerHTML = "";
   let totalHours = 0;
-  shopping_cart_arr.forEach((shop_cart_product) => {
-    totalHours += shop_cart_product.hours;
-    let product = products.find(
-      (products) => products.id_product == shop_cart_product.id_product
-    );
-    console.log(shop_cart_product);
-    let li_prd = `
-            <li class="list-group-item">
-                <div class="product-cart">
-                    <div class="container">
-                    <img
-                        src="${product.img_path}"
-                        class="img-cart"
-                    />
-                    </div>
-                    <div class="container">
-                    ${product.name_product}
-                    </div>
-                    <div class="container">
-                    <input
-                        type="number"
-                        class="form-control text-center"
-                        value="${shop_cart_product.hours}"
-                        min="0"
-                        id="qty"
-                    />
-                    </div>
-                    <div class="container">
-                    <i class="fa fa-trash rmv-prd" value="${product.id_product}"></i>
-                    </div>
-                </div>
-            </li>
-        `;
-    shoppingList.innerHTML += li_prd;
-  });
+  //Default shopping cart when it's empty
+  if(shopping_cart_arr.length <= 0){
+    shoppingList.innerHTML += `
+    <div class="container">
+      <p>
+        ¡Todavía no tienes horas de disfrute!<br />
+        Arrastra elementos aquí para empezar a alquilar.
+      </p>
+    </div>
+    `;
+  }
+  else{
+    //Fill shopping cart with products
+    shopping_cart_arr.forEach((shop_cart_product) => {
+      totalHours += shop_cart_product.hours;
+      let product = products.find(
+        (products) => products.id_product == shop_cart_product.id_product
+      );
+      console.log(shop_cart_product);
+      let li_prd = `
+              <li class="list-group-item">
+                  <div class="product-cart">
+                      <div class="container">
+                      <img
+                          src="${product.img_path}"
+                          class="img-cart"
+                      />
+                      </div>
+                      <div class="container">
+                      ${product.name_product}
+                      </div>
+                      <div class="container">
+                      <input
+                          type="number"
+                          class="form-control text-center prod_hours"
+                          value="${shop_cart_product.hours}"
+                          min="0"
+                          id="qty"
+                      />
+                      </div>
+                      <div class="container">
+                      <i class="fa fa-trash rmv-prd" value="${product.id_product}"></i>
+                      </div>
+                  </div>
+              </li>
+          `;
+      shoppingList.innerHTML += li_prd;
+    });
+  }
+
   document.querySelector("#horas").innerHTML = totalHours;
 };
 
