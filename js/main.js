@@ -7,7 +7,6 @@ let draggables_div;
 
 //SHOWCASE 'DATABASE'
 //SHOWCASE 'DATABASE'
-//SHOWCASE 'DATABASE'
 
 //OBJECT PRODUCTS CREATION
 function Product(id_product, name_product, img_path, type_product) {
@@ -47,7 +46,7 @@ products.push(
   new Product("prd_01", "Jocker", img_01, "movie"),
   new Product("prd_02", "GTA", img_02, "v_game"),
   new Product("prd_03", "Doom", img_03, "v_game"),
-  new Product("prd_04", "The handmanid's tale", img_04, "tv_show"),
+  new Product("prd_04", "The handmaid's tale", img_04, "tv_show"),
   new Product("prd_05", "The rise of Skywalker", img_05, "movie"),
   new Product("prd_06", "Dark", img_06, "tv_show"),
   new Product("prd_07", "Looper", img_07, "movie"),
@@ -69,8 +68,7 @@ const createProduct = (product) => {
             alt="${product.name_product}"
         />
         <div class="bottom-right">
-            <button id="btn_more" value="${product.id_product}">+</button>
-            <button id="btn_less" value="${product.id_product}">-</button>
+          <i class="fa fa-cart-arrow-down add-prd" aria-hidden="true" value="${product.id_product}"></i>
         </div>
     </div>
 `;
@@ -85,7 +83,6 @@ for (const key in products) {
   }
 }
 
-//FOCUS ELEMENTS
 //FOCUS ELEMENTS
 //FOCUS ELEMENTS
 const focusElements = (isFocus, elements) => {
@@ -109,8 +106,6 @@ const focusElements = (isFocus, elements) => {
 
 //DRAGABLE STUFF
 //DRAGABLE STUFF
-//DRAGABLE STUFF
-
 draggables_div = document.querySelectorAll(".draggable_div");
 
 //DRAGABLES DIV ACTIONS
@@ -123,9 +118,8 @@ draggables_div.forEach((draggable_div) => {
   ];
 
   draggable_div.addEventListener("dragstart", (ev) => {
-    console.log("dragstart");
+    //On dragstart, enable focus and transfer data to drop
     focusElements(true, allExceptShoppingCart);
-    //Transfer id product on drag start
     ev.dataTransfer.setData(
       "id_prd",
       ev.srcElement.closest([".draggable_div"]).id
@@ -133,10 +127,22 @@ draggables_div.forEach((draggable_div) => {
   });
 
   draggable_div.addEventListener("dragend", () => {
-    console.log("dragstend");
+    //When dragend dissable focus elements
     focusElements(false, allExceptShoppingCart);
-    //Add product to cart id
   });
+});
+
+
+// document.querySelector(".rmv-prd").addEventListener("click", () => {
+//   console.log("remove product");
+// });
+
+document.addEventListener('click',function(e){
+  let arr_classList = e.target.classList.contains('add-prd');
+  if(e.target && arr_classList){
+    let prd_id = e.path[0].attributes.value.textContent;
+    add_prod_to_cart(new Shop_cart_product(1, prd_id));
+  }
 });
 
 //DRAG START
@@ -144,10 +150,9 @@ const dragStartf = (elements) => {
   console.log(elements);
 };
 
-//DRAG OVER
 const dragOver = (ev) => {
+  // Dragover - When dragover removes the prohibition symbol. Allows drop.
   ev.preventDefault();
-  console.log("over");
 };
 
 //ACTIONS IN SHOPPING CART
@@ -156,8 +161,7 @@ shoppingCart.addEventListener("dragover", (ev) => {
 });
 
 shoppingCart.addEventListener("drop", (ev) => {
-  console.log("drop");
-  //Add product to cart
+  // Drop - On drop process add the elemenent to the shopping cart.
   var prd_id = ev.dataTransfer.getData("id_prd");
   add_prod_to_cart(new Shop_cart_product(1, prd_id));
 });
@@ -186,15 +190,15 @@ const add_prod_to_cart = (shop_cart_product) => {
 };
 
 const update_cart = () => {
-    shoppingList.innerHTML = "";
-
-    shopping_cart_arr.forEach((shop_cart_product) => {
-        
-        let product = products.find(
-            (products) => products.id_product == shop_cart_product.id_product
-            );
-        console.log(shop_cart_product);
-        let li_prd = `
+  shoppingList.innerHTML = "";
+  let totalHours = 0;
+  shopping_cart_arr.forEach((shop_cart_product) => {
+    totalHours += shop_cart_product.hours;
+    let product = products.find(
+      (products) => products.id_product == shop_cart_product.id_product
+    );
+    console.log(shop_cart_product);
+    let li_prd = `
             <li class="list-group-item">
                 <div class="product-cart">
                     <div class="container">
@@ -216,16 +220,15 @@ const update_cart = () => {
                     />
                     </div>
                     <div class="container">
-                    <i class="fa fa-trash" id="rmv-prd"></i>
+                    <i class="fa fa-trash rmv-prd" value="${product.id_product}"></i>
                     </div>
                 </div>
             </li>
-        `
-        shoppingList.innerHTML += li_prd;
-        });   
+        `;
+    shoppingList.innerHTML += li_prd;
+  });
+  document.querySelector("#horas").innerHTML = totalHours;
 };
-
-
 
 // add_prod_to_cart(new Shop_cart_product(10, 'prd_01'));
 
