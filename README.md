@@ -1,6 +1,8 @@
 ### GeekHubs Academy - Bootcamp Full Stack Developer
 # Reto 2 - SHOWCASE
 
+
+
 ## Technologies used
 * HTML5
 * CSS3
@@ -12,6 +14,7 @@ Created:
 * Master branch
 * Develop branch
 * Feature branches
+* Hotfix branches
 
 
 ## Author

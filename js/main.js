@@ -132,17 +132,17 @@ draggables_div.forEach((draggable_div) => {
   });
 });
 
-document.addEventListener('click', (e) => {
+document.addEventListener("click", (e) => {
   //Remove product
-  let rmv_class = e.target.classList.contains('rmv-prd');
-  if(e.target && rmv_class){
+  let rmv_class = e.target.classList.contains("rmv-prd");
+  if (e.target && rmv_class) {
     let prd_id = e.path[0].attributes.value.textContent;
     rmv_prod_from_cart(prd_id);
   }
-  
+
   //Add product
-  let add_class = e.target.classList.contains('add-prd');
-  if(e.target && add_class){
+  let add_class = e.target.classList.contains("add-prd");
+  if (e.target && add_class) {
     let prd_id = e.path[0].attributes.value.textContent;
     add_prod_to_cart(new Shop_cart_product(1, prd_id));
   }
@@ -150,10 +150,10 @@ document.addEventListener('click', (e) => {
 
 document.addEventListener("change", (e) => {
   //Add product from input number shopping card
-  let add_hour = e.target.classList.contains('add_hour');
-  if(e.target && add_hour){
+  let add_hour = e.target.classList.contains("add_hour");
+  if (e.target && add_hour) {
     let new_hours = e.srcElement.value;
-    let prd_id = e.path[0].attributes.id.textContent.replace('nbr_', '');
+    let prd_id = e.path[0].attributes.id.textContent.replace("nbr_", "");
     update_prod_cart(prd_id, new_hours);
   }
 });
@@ -204,7 +204,7 @@ const add_prod_to_cart = (shop_cart_product) => {
 
 const update_prod_cart = (id_prd, new_hours) => {
   let shop_cart_prd = shopping_cart_arr.find(
-    shop_cart_product => shop_cart_product.id_product == id_prd
+    (shop_cart_product) => shop_cart_product.id_product == id_prd
   );
 
   let i = shopping_cart_arr.indexOf(shop_cart_prd);
@@ -218,7 +218,7 @@ const rmv_prod_from_cart = (id_prd) => {
     (shop_cart_product) => shop_cart_product.id_product == id_prd
   );
   if (product) {
-    let filtered_shpcrt = shopping_cart_arr.filter(prod => prod !== product)
+    let filtered_shpcrt = shopping_cart_arr.filter((prod) => prod !== product);
     shopping_cart_arr = filtered_shpcrt;
   }
 
@@ -229,7 +229,7 @@ const update_cart = () => {
   shoppingList.innerHTML = "";
   let totalHours = 0;
   //Default shopping cart when it's empty
-  if(shopping_cart_arr.length <= 0){
+  if (shopping_cart_arr.length <= 0) {
     shoppingList.innerHTML += `
     <div class="container text-center">
       <p>
@@ -240,8 +240,7 @@ const update_cart = () => {
       </p>
     </div>
     `;
-  }
-  else{
+  } else {
     //Fill shopping cart with products
     shopping_cart_arr.forEach((shop_cart_product) => {
       totalHours += shop_cart_product.hours;
@@ -284,21 +283,22 @@ const update_cart = () => {
   }
 
   document.querySelector("#horas").innerHTML = totalHours;
-  showalert('success', '<i class="far fa-check-circle"></i>');
+  showalert("success", '<i class="far fa-check-circle"></i>');
 };
 
 function showalert(alerttype, message) {
   $("#alertdiv").remove();
-  $('#alert_placeholder').append(`
+  $("#alert_placeholder").append(`
     <div id="alertdiv" class="alert alert-${alerttype}">
       <a id="suc_al_close" href="#" class="close"></a>
       ${message}
     </div>
-  `)
+  `);
   // $("#alertdiv").hide('fade');
-  setTimeout(() => { $("#alertdiv").remove(); }, 700);
+  setTimeout(() => {
+    $("#alertdiv").remove();
+  }, 700);
 }
-
 
 // add_prod_to_cart(new Shop_cart_product(10, 'prd_01'));
 
@@ -324,6 +324,4 @@ games_filter_element.addEventListener("click", () => {
 // ALERT
 // ALERT
 
-
-window.addEventListener('load', () => {
-})
+window.addEventListener("load", () => {});
