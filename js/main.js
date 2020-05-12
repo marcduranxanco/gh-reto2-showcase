@@ -231,9 +231,11 @@ const update_cart = () => {
   //Default shopping cart when it's empty
   if(shopping_cart_arr.length <= 0){
     shoppingList.innerHTML += `
-    <div class="container">
+    <div class="container text-center">
       <p>
-        ¡Todavía no tienes horas de disfrute!<br />
+        <br />
+        Todavía no tienes horas de disfrute!!
+        <br />
         Arrastra elementos aquí para empezar a alquilar.
       </p>
     </div>
@@ -282,7 +284,21 @@ const update_cart = () => {
   }
 
   document.querySelector("#horas").innerHTML = totalHours;
+  showalert('success', '<i class="far fa-check-circle"></i>');
 };
+
+function showalert(alerttype, message) {
+  $("#alertdiv").remove();
+  $('#alert_placeholder').append(`
+    <div id="alertdiv" class="alert alert-${alerttype}">
+      <a id="suc_al_close" href="#" class="close"></a>
+      ${message}
+    </div>
+  `)
+  // $("#alertdiv").hide('fade');
+  setTimeout(() => { $("#alertdiv").remove(); }, 700);
+}
+
 
 // add_prod_to_cart(new Shop_cart_product(10, 'prd_01'));
 
@@ -305,9 +321,9 @@ games_filter_element.addEventListener("click", () => {
   focusElements(true, ["#tvshows_filter_element", "#movies_filter_element"]);
 });
 
-// FILTER
+// ALERT
+// ALERT
 
-// window.addEventListener('load', function() {
-//     let prd_01 = document.querySelector('#prd_01');
-//     prd_01.style.display = "none";
-// })
+
+window.addEventListener('load', () => {
+})

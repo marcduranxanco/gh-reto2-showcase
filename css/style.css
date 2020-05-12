@@ -113,6 +113,17 @@ main {
   background-color: #f8bbd0;
 }
 
+#alert_placeholder {
+  position:absolute;
+  right:15px;
+  top:4px;
+  z-index: 10;
+}
+
+.alert-success {
+  border: none !important;
+}
+
 /* MAIN END */
 
 /* NAV BEGIN */
@@ -132,7 +143,14 @@ main {
   padding: 15px;
   cursor: pointer;
   max-height: 14em;
-  height: 14em;
+  height: 22em;
+}
+
+@media (max-width: 768px) {
+  .draggable_div {
+    max-height: 22em;
+    height: 22em
+  }
 }
 
 .draggable_div > img {
@@ -174,19 +192,26 @@ footer h5, footer .image_ftr {
   text-align: center;
 }
 
+footer i {
+  margin-right: 1em;
+}
+
 footer a {
   color: rgb(33, 37, 41);
   text-decoration: none;
-}
-
-footer i {
-  margin-right: 1em;
 }
 
 footer a:hover {
   text-decoration: none;
   color:#f06292;
 }
+
+@media (min-width: 576px) {
+  footer ul {
+    margin-left: 4.5em;
+  }
+}
+
 
 .footer-copyright {
   background-color: #f06292;
