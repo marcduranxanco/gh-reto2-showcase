@@ -187,6 +187,18 @@ main {
 footer {
   background-color: #fce4ec;
   font-size: 0.7em;
+}
+
+footer .div_about {
+  margin-bottom: 2em;
+}
+
+footer .text_about {
+  text-align: center;
+}
+
+footer .icons_about {
+  font-size: 3em;
   text-align: center;
 }
 
@@ -207,12 +219,6 @@ footer a {
 footer a:hover {
   text-decoration: none;
   color: #f06292;
-}
-
-@media (min-width: 576px) {
-  footer ul {
-    margin-left: 8em;
-  }
 }
 
 .footer-copyright {
