@@ -1,6 +1,7 @@
-### GeekHubs Academy - Bootcamp Full Stack Developer
-# 🎥 Reto 2 - SHOWCASE
-![Image of the web working](http://gh-reto2-showcase.duranxanco.com/img/gif_pc.gif)
+# 🎥 T3F - Inital Mockup
+![Image of the web working](https://raw.githubusercontent.com/marcduranxanco/t3f-mockup/master/img/gif_pc.gif)
+
+### Created for GeekHubs Academy - Bootcamp Full Stack Developer
 
 ## Technologies used
 * HTML5
